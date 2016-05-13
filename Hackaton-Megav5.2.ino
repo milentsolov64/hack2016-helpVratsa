@@ -16,6 +16,8 @@ String passIvo = "12346A";
 String lockIvo = "12346B";
 String passMilen="09831A";
 String lockMilen ="09831B";
+String passTeo="69696A";
+String lockTeo="69696B";
 String pass;
 int flag = 0;
 
@@ -119,6 +121,16 @@ for(int i = 0; i < 6; i){
     //clcd.clear(WHITE);
     clcd.setStr("Hello, Milen!         ", 2,2,RED,WHITE);
   }
+  
+  if(readRfid == okRfid_3) {
+    lcd.setCursor(0,0);
+    
+    lcd.print("Hello, Teo!");
+        lcd.setCursor(0,1);
+        lcd.print("             ");
+    //clcd.clear(WHITE);
+    clcd.setStr("Hello, Teo!         ", 2,2,RED,WHITE);
+  }
 }
 
 
@@ -189,6 +201,72 @@ for(int i = 0; i < 6; i){
 
 
 
+        if (readRfid==okRfid_3 && pass == passTeo) {
+    analogWrite(A15, 200);
+    lcd.clear();
+    lcd.setCursor(0,0);
+      lcd.print("Unlocked");
+      clcd.clear(WHITE);
+      clcd.setStr("Unlocked", 2,2,RED,WHITE);
+      //myservo.write(0);
+      
+      delay(2000);
+      clcd.clear(WHITE);
+      lcd.clear();
+          
+      }
+
+  if (readRfid==okRfid_3 && pass == lockTeo) {
+   analogWrite(A15,100); 
+   lcd.clear();
+    clcd.clear(WHITE);
+    clcd.setStr("Locked", 2,2,RED,WHITE);
+    lcd.setCursor(0,0);
+      lcd.print("Locked");
+     // myservo.write(120);
+     
+      delay(2000);
+      lcd.clear();
+      clcd.clear(WHITE);
+      
+      }
+
+
+  if (readRfid != okRfid_3 && (pass == passTeo || pass == lockTeo) && pass != "") {
+    lcd.clear();
+    clcd.clear(WHITE);
+    lcd.setCursor(0,0);
+      lcd.print("Don`t match");
+      clcd.setStr("Don't match", 2,2,RED,WHITE);
+      delay(1000);
+      lcd.clear();
+          
+      }
+
+
+  if (readRfid==okRfid_3) {
+    if(pass != lockTeo){
+      if(pass != passTeo){
+        lcd.clear();
+        clcd.clear(WHITE);
+    lcd.setCursor(0,0);
+      lcd.print("Don`t Match");
+      clcd.setStr("Don`t Match", 2,2,RED,WHITE);
+      delay(1000);
+      clcd.clear(WHITE);
+      lcd.clear();
+      }
+    }
+    
+    
+          
+      }
+      
+      
+      
+      
+      
+      
         if (readRfid==okRfid_2 && pass == passMilen) {
     analogWrite(A15, 200);
     lcd.clear();
