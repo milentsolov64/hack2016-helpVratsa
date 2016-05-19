@@ -61,7 +61,7 @@ byte cPins[COLS] = {
 Keypad kl = Keypad( makeKeymap(keys), rPins, cPins, ROWS, COLS);
 float t;
 void setup() {
-  setTime(00, 00, 00, 6, 2, 2016);
+  setTime(16, 49, 00, 19, 5, 2016);
   t=second();
   Serial.begin(9600);
   while (!Serial);
@@ -95,11 +95,13 @@ void dump_byte_array(byte *buffer, byte bufferSize) {
 void loop() {
 
 
-  //xtime();
+  xtime();
+  //digitalClockDisplay( );
   lcd.setBacklight(HIGH);
   myservo.attach(44);
 
-  ident();
+  //ident();
+
   //analogWrite(A15,0);
 
 
@@ -123,7 +125,7 @@ void loop() {
     //clcd.clear(WHITE);
     if(readRfid == okRfid_1) {
       lcd.setCursor(0,0);    
-      lcd.print("Hello, Ivo!");
+      lcd.print("Hello, Ivo!     ");
       //clcd.clear(WHITE);
       lcd.setCursor(0,1);
       lcd.print("             ");
@@ -133,7 +135,7 @@ void loop() {
     if(readRfid == okRfid_2) {
       lcd.setCursor(0,0);
 
-      lcd.print("Hello, Milen!");
+      lcd.print("Hello, Milen!   ");
       lcd.setCursor(0,1);
       lcd.print("             ");
       //clcd.clear(WHITE);
@@ -143,7 +145,7 @@ void loop() {
     if(readRfid == okRfid_3) {
       lcd.setCursor(0,0);
 
-      lcd.print("Hello, Teo!");
+      lcd.print("Hello, Teo       !");
       lcd.setCursor(0,1);
       lcd.print("             ");
       //clcd.clear(WHITE);
@@ -156,8 +158,8 @@ void loop() {
 
   if (readRfid==okRfid_1 && pass == passIvo) {
     //analogWrite(A15, 200);
-    //lcd.clear();
-    //lcd.setCursor(0,0);
+    lcd.clear();
+    lcd.setCursor(0,0);
     lcd.print("Unlocked");
     //clcd.clear(WHITE);
     //clcd.setStr("Unlocked", 2,2,RED,WHITE);
@@ -380,15 +382,18 @@ void ident(){
   //lcd.setCursor(4,1);
   //lcd.print("Robotics");
 
-
-  if(t==second())
+//digitalClockDisplay( );
+  
+}
+void xtime(){
+if(t==second())
   {
     digitalClockDisplay( );
     t++;
   }
   if(t==60)t=0;
-}
 
+}
 void printDigits(byte digits){
   // utility function for digital clock display: prints preceding colon and leading 0
   lcd.print(":");
